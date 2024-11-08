@@ -16,7 +16,6 @@ Kd = 0.1
 
 
 random_target_changes = True  # Randomize target height
-interference_signals = True  # Introduce interference
 sensor_calibration_error = True  # Sensor drift
 varying_load = True  # Simulate load changes
 battery_fluctuations = True  # Simulate battery drain or motor limitations
@@ -27,7 +26,6 @@ prev_error = 0.0
 
 
 target_height_variation = 0.5  # Max variation for target height changes
-interference_amplitude = 0.02  # Magnitude of interference signal
 sensor_drift_rate = 0.001  # Drift rate of sensor calibration error
 load_variation_amplitude = 0.05  # Amplitude of varying load effect
 battery_drain_rate = 0.0005  # Rate of battery limitation over time
@@ -53,11 +51,6 @@ for t in range(time_steps):
     if battery_fluctuations:
         control_signal *= (1 - battery_drain_rate * t)  # Simulate battery power decrease over time
     
-
-    if interference_signals:
-        control_signal += np.random.uniform(-interference_amplitude, interference_amplitude)
-    
-
     if sensor_calibration_error:
         altitude += sensor_drift_rate * t  # Simulate gradual sensor drift
     
